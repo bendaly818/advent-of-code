@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sort"
 	"strconv"
 	"strings"
 
@@ -13,7 +14,7 @@ func main() {
 
 	res := strings.Split(contents, "\n\n")
 
-	var highestWeight int = 0
+	weights := []int{}
 	for _, elf := range res {
 		parts := strings.Split(elf, "\n")
 		var totalWeight int = 0
@@ -21,10 +22,12 @@ func main() {
 			weight, _ := strconv.Atoi(weightString)
 			totalWeight += weight
 		}
-		if totalWeight > highestWeight {
-			highestWeight = totalWeight
-		}
+		weights = append(weights, totalWeight)
 	}
 
-	fmt.Println(highestWeight)
+	sort.Slice(weights, func(i, j int) bool {
+		return weights[i] > weights[j]
+	})
+
+	fmt.Println(weights[0] + weights[1] + weights[2])
 }
