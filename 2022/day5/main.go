@@ -66,13 +66,9 @@ func main() {
 		var moveTo = moveInts[2]
 		take, leftovers := slice(numberToMove, cratesMap[moveFrom])
 		cratesMap[moveFrom] = leftovers
-		for i := len(take) - 1; i >= 0; i-- {
-			cratesMap[moveTo] = append(cratesMap[moveTo], take[i])
-		}
-
+		cratesMap[moveTo] = append(cratesMap[moveTo], take...)
 	}
 
-	fmt.Println((len(cratesMap)))
 	for i := 1; i <= len(cratesMap); i++ {
 		fmt.Print(cratesMap[i][len(cratesMap[i])-1])
 	}
